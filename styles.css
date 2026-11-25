@@ -732,3 +732,55 @@ html.no-wa .waf, html.no-wa [data-wa], html.no-wa [data-needs-wa] { display: non
   .live .exp:not(.is-open) .exp__txt, .live .exp:not(.is-open) .exp__chips { opacity: 1; translate: none; }
   .loader__chip { animation: none !important; }
 }
+
+/* =========================================================
+   Videos por secciones (.vid)
+   Bloque agregado al final: solo usa clases nuevas .vid*
+   ========================================================= */
+.vid { position: relative; padding: var(--sp) 0; background: #fff; overflow-x: clip; }
+.vid--hueso { background: var(--hueso); }
+.vid--marino { background: var(--marino); color: var(--on-m); }
+.vid--marino h2 { color: #fff; }
+.vid--marino .hl { color: var(--amarillo); }
+.vid--marino .vid__lead { color: var(--on-m2); }
+.vid--marino .vid__item figcaption { color: var(--on-m); }
+.vid--marino .vid__frame { box-shadow: 8px 8px 0 var(--rojo); }
+
+.vid__head { max-width: 40rem; margin-bottom: clamp(1.8rem, 4vw, 3rem); }
+.vid__lead { color: var(--tinta-suave); max-width: 34rem; }
+
+.vid__row { display: flex; flex-direction: column; align-items: center; gap: 2.2rem; }
+.vid__item { --vmax: 560px; width: 100%; max-width: calc(var(--vmax) * var(--ar)); }
+.vid__item figcaption { margin-top: 1.1rem; font: 700 .95rem/1.3 var(--f-b); color: var(--tinta); }
+
+.vid__frame { position: relative; aspect-ratio: var(--ar); border-radius: 22px; overflow: hidden; background: var(--tinta); box-shadow: 8px 8px 0 var(--marino); isolation: isolate; }
+.vid__frame video { display: block; width: 100%; height: 100%; object-fit: contain; background: var(--tinta); }
+
+/* botón de play (solo con JS; sin JS se usan los controles nativos del video) */
+.vid__play { display: none; }
+.js .vid__play { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; width: 100%; padding: 0; border: 0; cursor: pointer; background: linear-gradient(180deg, rgba(14, 27, 61, 0) 45%, rgba(14, 27, 61, .5)); transition: opacity .3s, visibility 0s; }
+.vid__play:focus-visible { outline-offset: -6px; }
+.vid__btn { position: relative; display: grid; place-items: center; width: 68px; height: 68px; border-radius: 50%; background: var(--rojo); color: #fff; box-shadow: 0 14px 30px -10px rgba(224, 22, 31, .8); transition: scale .3s var(--ease), background .3s; }
+.vid__btn svg { width: 28px; height: 28px; margin-left: 4px; fill: currentColor; }
+.vid__btn::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--rojo); opacity: 0; pointer-events: none; animation: vidRing 2.2s ease-out infinite; }
+.vid__play:hover .vid__btn { scale: 1.08; background: var(--rojo-prof); }
+.vid__frame.is-started .vid__play { opacity: 0; visibility: hidden; pointer-events: none; }
+@keyframes vidRing { 0% { opacity: .75; scale: 1; } 100% { opacity: 0; scale: 1.5; } }
+
+/* secciones con texto + un solo video */
+.vid__split { display: grid; gap: 2rem; align-items: center; }
+.vid__split .vid__head { margin-bottom: 0; }
+.vid__split .vid__item { max-width: none; }
+
+@media (min-width: 640px) {
+  .vid__btn { width: 78px; height: 78px; }
+  .vid__btn svg { width: 32px; height: 32px; }
+}
+@media (min-width: 900px) {
+  .vid__row { --vh: 320px; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2.2rem; }
+  .vid__row--tall { --vh: 560px; }
+  .vid__row .vid__item { flex: 0 1 calc(var(--vh) * var(--ar)); width: auto; min-width: 0; max-width: none; }
+  .vid__split { grid-template-columns: 5fr 7fr; gap: clamp(2rem, 5vw, 4.5rem); }
+  .vid__split--rev { grid-template-columns: 7fr 5fr; }
+  .vid__split--rev .vid__item { order: -1; }
+}
