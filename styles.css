@@ -784,3 +784,12 @@ html.no-wa .waf, html.no-wa [data-wa], html.no-wa [data-needs-wa] { display: non
   .vid__split--rev { grid-template-columns: 7fr 5fr; }
   .vid__split--rev .vid__item { order: -1; }
 }
+
+/* ---- Videos de inicio: lo primero que se ve al abrir la página ---- */
+.vid--inicio { padding: calc(var(--hdr) + clamp(1.4rem, 3.5vw, 2.6rem)) 0 clamp(3rem, 6vw, 5rem); }
+.vid--inicio .vid__head { margin-bottom: clamp(1.4rem, 3vw, 2.2rem); }
+.vid--inicio h2 { margin-bottom: .6rem; font-size: clamp(2rem, 5vw, 3.4rem); }
+.vid--inicio .vid__item { --vmax: 480px; }
+@media (min-width: 900px) {
+  .vid--inicio .vid__row { --vh: clamp(300px, calc(100svh - 380px), 480px); }
+}
